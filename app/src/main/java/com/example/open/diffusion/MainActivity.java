@@ -1,6 +1,7 @@
 package com.example.open.diffusion;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatSpinner;
 
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
@@ -24,12 +25,17 @@ import ai.onnxruntime.OnnxTensor;
 
 public class MainActivity extends AppCompatActivity {
     private final ExecutorService exec = Executors.newCachedThreadPool();
+    private final int[] resolution = {192, 256, 320, 384, 448, 512};
 
     private ImageView mImageView;
     private TextView mMsgView;
     private EditText mGuidanceView;
     private EditText mStepView;
     private EditText mPromptView;
+    private EditText mNetPromptView;
+    private AppCompatSpinner mWidthSpinner;
+    private AppCompatSpinner mHeightSpinner;
+    private ProgressDialog progressDialog;
 
     private UNet uNet;
     private TextTokenizer tokenizer;
@@ -56,6 +62,14 @@ public class MainActivity extends AppCompatActivity {
         mGuidanceView = findViewById(R.id.guidance);
         mStepView = findViewById(R.id.step);
         mPromptView = findViewById(R.id.prompt);
+        mWidthSpinner = findViewById(R.id.width);
+        mHeightSpinner = findViewById(R.id.height);
+        mNetPromptView = findViewById(R.id.neg_prompt);
+
+        mWidthSpinner.setSelection(3);
+        mHeightSpinner.setSelection(3);
+
+        progressDialog = new ProgressDialog(MainActivity.this);
 
         uNet = new UNet(this, Device.CPU);
         tokenizer = new EngTokenizer(this);
@@ -97,6 +111,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.copy).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressDialog.show();
+                exec.execute(new MyRunnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            FileUtils.copyAssets(getAssets(), "model", new File(PathManager.getAsssetOutputPath(MainActivity.this)));
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }finally {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressDialog.dismiss();
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        });
+
         findViewById(R.id.generate).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,11 +154,12 @@ public class MainActivity extends AppCompatActivity {
         final String guidanceText = mGuidanceView.getText().toString();
         final String stepText = mStepView.getText().toString();
         final String prompt = mPromptView.getText().toString();
+        final String negPrompt = mNetPromptView.getText().toString();
 
         final int num_inference_steps = TextUtils.isEmpty(stepText) ? 8 : Integer.parseInt(stepText);
         final double guidance_scale = TextUtils.isEmpty(guidanceText) ? 7.5f : Float.valueOf(guidanceText);
-        UNet.WIDTH = 384;
-        UNet.HEIGHT = 384;
+        UNet.WIDTH = resolution[mWidthSpinner.getSelectedItemPosition()];
+        UNet.HEIGHT = resolution[mHeightSpinner.getSelectedItemPosition()];
 
         return new MyRunnable() {
             @Override
@@ -129,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
                     tokenizer.init();
                     int batch_size = 1;
                     int[] textTokenized = tokenizer.encoder(prompt);
-                    int[] negTokenized = tokenizer.createUncondInput("");
+                    int[] negTokenized = tokenizer.createUncondInput(negPrompt);
 
                     OnnxTensor textPromptEmbeddings = tokenizer.tensor(textTokenized);
                     OnnxTensor uncondEmbedding = tokenizer.tensor(negTokenized);

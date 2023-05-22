@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Android-Stable-diffusion-ONNX</string>
+    <string-array name="Resolution">
+        <item>192</item>
+        <item>256</item>
+        <item>320</item>
+        <item>384</item>
+        <item>448</item>
+        <item>512</item>
+    </string-array>
 </resources>

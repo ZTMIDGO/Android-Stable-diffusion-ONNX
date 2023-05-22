@@ -8,6 +8,29 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     tools:context=".MainActivity">
+    <Button
+        android:id="@+id/copy"
+        android:text="复制Assets到模型路径"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/width"
+            android:entries="@array/Resolution"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/height"
+            android:entries="@array/Resolution"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
     <androidx.appcompat.widget.LinearLayoutCompat
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -34,6 +57,13 @@
     <EditText
         android:id="@+id/prompt"
         android:text="Japanese garden at wildlife river and mountain range, highly detailed, digital illustration, artstation, concept art, matte, sharp focus, illustration, dramatic, sunset, hearthstone, art by Artgerm and Greg Rutkowski and Alphonse Mucha."
+        android:lines="2"
+        android:maxLines="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/neg_prompt"
+        android:hint="Neg prompt"
         android:lines="2"
         android:maxLines="2"
         android:layout_width="match_parent"
