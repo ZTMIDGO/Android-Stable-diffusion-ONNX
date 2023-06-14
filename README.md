@@ -9,4 +9,10 @@
 也可以通过安装App体验（Google云盘 需要科学上网）
 https://drive.google.com/file/d/1PCpnFQlKaU93QMysFDWJInRFrfDGn4wB/view?usp=sharing
 
+Run Stable diffusion on your Android phone
+
+Download https://huggingface.co/TIEMING/Chilloutmix/tree/main model Copy the model to the Assets folder
+
+You can also experience it by installing the app (Google cloud disk needs scientific Internet access) https://drive.google.com/file/d/1PCpnFQlKaU93QMysFDWJInRFrfDGn4wB/view?usp=sharing
+
 ![image](https://github.com/ZTMIDGO/Android-Stable-diffusion-ONNX/blob/master/2.jpg)
