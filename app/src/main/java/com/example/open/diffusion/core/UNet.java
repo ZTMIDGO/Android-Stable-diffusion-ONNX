@@ -11,6 +11,7 @@ import com.example.open.diffusion.MyTensor;
 import com.example.open.diffusion.PathManager;
 import com.example.open.diffusion.TensorHelper;
 import com.example.open.diffusion.core.scheduler.DPMSolverMultistepScheduler;
+import com.example.open.diffusion.core.scheduler.EulerAncestralDiscreteScheduler;
 import com.example.open.diffusion.core.scheduler.Scheduler;
 
 import java.nio.IntBuffer;
@@ -106,7 +107,7 @@ public class UNet {
 
     public void inference(int numInferenceSteps, OnnxTensor textEmbeddings, double guidanceScale, int batchSize, int width, int height) throws Exception {
         isStop = false;
-        Scheduler scheduler = new DPMSolverMultistepScheduler();
+        Scheduler scheduler = new EulerAncestralDiscreteScheduler(context);
 
         int[] timesteps = scheduler.set_timesteps(numInferenceSteps);
 
