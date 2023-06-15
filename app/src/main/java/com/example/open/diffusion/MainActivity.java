@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private AppCompatSpinner mWidthSpinner;
     private AppCompatSpinner mHeightSpinner;
     private ProgressDialog progressDialog;
+    private EditText mSeedView;
 
     private UNet uNet;
     private TextTokenizer tokenizer;
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         mWidthSpinner = findViewById(R.id.width);
         mHeightSpinner = findViewById(R.id.height);
         mNetPromptView = findViewById(R.id.neg_prompt);
+        mSeedView = findViewById(R.id.seed);
 
         mWidthSpinner.setSelection(3);
         mHeightSpinner.setSelection(3);
@@ -155,9 +157,11 @@ public class MainActivity extends AppCompatActivity {
         final String stepText = mStepView.getText().toString();
         final String prompt = mPromptView.getText().toString();
         final String negPrompt = mNetPromptView.getText().toString();
+        final String seedText = mSeedView.getText().toString();
 
         final int num_inference_steps = TextUtils.isEmpty(stepText) ? 8 : Integer.parseInt(stepText);
         final double guidance_scale = TextUtils.isEmpty(guidanceText) ? 7.5f : Float.valueOf(guidanceText);
+        final int seed = TextUtils.isEmpty(seedText) ? 0 : Integer.parseInt(seedText);
         UNet.WIDTH = resolution[mWidthSpinner.getSelectedItemPosition()];
         UNet.HEIGHT = resolution[mHeightSpinner.getSelectedItemPosition()];
 
@@ -186,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
                     tokenizer.close();
 
                     uNet.init();
-                    uNet.inference(num_inference_steps, textEmbeddings, guidance_scale, batch_size, UNet.WIDTH, UNet.HEIGHT);
+                    uNet.inference(seed, num_inference_steps, textEmbeddings, guidance_scale, batch_size, UNet.WIDTH, UNet.HEIGHT);
                 }catch (Exception e){
                     runOnUiThread(new Runnable() {
                         @Override
