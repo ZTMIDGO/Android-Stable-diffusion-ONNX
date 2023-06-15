@@ -86,6 +86,7 @@
                 android:inputType="number"
                 android:maxLines="1"
                 android:text="0"
+                android:textSize="16sp"
                 android:gravity="center"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
