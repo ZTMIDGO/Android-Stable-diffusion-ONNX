@@ -15,4 +15,6 @@ Download https://huggingface.co/TIEMING/Chilloutmix/tree/main model Copy the mod
 
 You can also experience it by installing the app (Google cloud disk needs scientific Internet access) https://drive.google.com/file/d/1PCpnFQlKaU93QMysFDWJInRFrfDGn4wB/view?usp=sharing
 
+![cap](https://github.com/ZTMIDGO/Android-Stable-diffusion-ONNX/assets/50280785/2efb0f03-43dd-4402-b2e6-bafe3cd2927c)
+
 ![image](https://github.com/ZTMIDGO/Android-Stable-diffusion-ONNX/blob/master/2.jpg)
