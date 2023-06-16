@@ -63,7 +63,7 @@ public class UNet {
         return map;
     }
 
-    public MyTensor generateLatentSample(int batchSize, int height, int width, int seed, float initNoiseSigma) throws Exception {
+    public MyTensor generateLatentSample(int batchSize, int height, int width, long seed, float initNoiseSigma) throws Exception {
         Random random = new Random(seed);
         int channels = 4;
 
@@ -105,13 +105,13 @@ public class UNet {
         isStop = true;
     }
 
-    public void inference(int seedNum, int numInferenceSteps, OnnxTensor textEmbeddings, double guidanceScale, int batchSize, int width, int height) throws Exception {
+    public void inference(long seedNum, int numInferenceSteps, OnnxTensor textEmbeddings, double guidanceScale, int batchSize, int width, int height) throws Exception {
         isStop = false;
         Scheduler scheduler = new EulerAncestralDiscreteScheduler(context);
 
         int[] timesteps = scheduler.set_timesteps(numInferenceSteps);
 
-        int seed = seedNum <= 0 ? random.nextInt() : seedNum;
+        long seed = seedNum <= 0 ? random.nextLong() : seedNum;
         MyTensor latents = generateLatentSample(batchSize, height, width, seed, (float) scheduler.getInitNoiseSigma());
 
         long[] shape = new long[]{2, 4, height / 8, width / 8};

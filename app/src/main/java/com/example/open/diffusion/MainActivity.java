@@ -158,10 +158,10 @@ public class MainActivity extends AppCompatActivity {
         final String prompt = mPromptView.getText().toString();
         final String negPrompt = mNetPromptView.getText().toString();
         final String seedText = mSeedView.getText().toString();
-
+        
         final int num_inference_steps = TextUtils.isEmpty(stepText) ? 8 : Integer.parseInt(stepText);
         final double guidance_scale = TextUtils.isEmpty(guidanceText) ? 7.5f : Float.valueOf(guidanceText);
-        final int seed = TextUtils.isEmpty(seedText) ? 0 : Integer.parseInt(seedText);
+        final long seed = TextUtils.isEmpty(seedText) ? 0 : Long.parseLong(seedText);
         UNet.WIDTH = resolution[mWidthSpinner.getSelectedItemPosition()];
         UNet.HEIGHT = resolution[mHeightSpinner.getSelectedItemPosition()];
 
