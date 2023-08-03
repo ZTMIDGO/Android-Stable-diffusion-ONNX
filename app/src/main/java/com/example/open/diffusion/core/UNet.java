@@ -14,6 +14,7 @@ import com.example.open.diffusion.core.scheduler.DPMSolverMultistepScheduler;
 import com.example.open.diffusion.core.scheduler.EulerAncestralDiscreteScheduler;
 import com.example.open.diffusion.core.scheduler.Scheduler;
 
+import java.io.File;
 import java.nio.IntBuffer;
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -52,7 +53,8 @@ public class UNet {
         OrtSession.SessionOptions options = new OrtSession.SessionOptions();
         options.addConfigEntry("session.load_model_format", "ORT");
         if (deviceId == Device.NNAPI) options.addNnapi(EnumSet.of(NNAPIFlags.CPU_DISABLED));
-        session = App.ENVIRONMENT.createSession(PathManager.getModelPath(context) +"/" +model, options);
+        File file = new File(PathManager.getCustomPath(context) + "/" + model);
+        session = App.ENVIRONMENT.createSession(file.exists() ? file.getAbsolutePath() : PathManager.getModelPath(context) +"/" +model, options);
     }
 
     public Map<String, OnnxTensor> createUnetModelInput(OnnxTensor encoderHiddenStates, OnnxTensor sample, OnnxTensor timeStep){

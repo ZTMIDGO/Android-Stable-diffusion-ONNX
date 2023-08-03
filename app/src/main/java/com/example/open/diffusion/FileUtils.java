@@ -58,4 +58,55 @@ public class FileUtils {
         in.close();
         out.close();
     }
+
+    public static void write(InputStream in, String filePath, String name) throws IOException {
+        createPath(new File(filePath));
+        int index;
+        byte[] bytes = new byte[1024];
+        OutputStream out = new FileOutputStream(filePath + "/" + name);
+        while ((index = in.read(bytes)) != -1) {
+            out.write(bytes, 0, index);
+            out.flush();
+        }
+        in.close();
+        out.close();
+    }
+
+    public static void createPath(File file){
+        if (!file.exists()){
+            file.mkdirs();
+        }
+    }
+
+    public static void deleteFile(String filePath){
+        File file = new File(filePath);
+        if (file.exists()){
+            file.delete();
+        }
+    }
+
+    public static void deleteAllFile(File file){
+        if(file.isFile()){
+            file.delete();
+            return;
+        }
+
+        File[] files = file.listFiles();
+
+        if(files == null)
+            return;
+
+        for(int i = 0; i < files.length; i++){
+            File f = files[i];
+            if(f.isFile()){
+                f.delete();
+            }else{
+                deleteAllFile(f);
+                f.delete();
+            }
+        }
+
+        file.delete();
+    }
+
 }

@@ -8,6 +8,7 @@ import com.example.open.diffusion.App;
 import com.example.open.diffusion.Device;
 import com.example.open.diffusion.PathManager;
 
+import java.io.File;
 import java.util.EnumSet;
 import java.util.Map;
 
@@ -36,7 +37,8 @@ public class VaeDecoder {
         OrtSession.SessionOptions options = new OrtSession.SessionOptions();
         options.addConfigEntry("session.load_model_format", "ORT");
         if (deviceId == Device.NNAPI) options.addNnapi(EnumSet.of(NNAPIFlags.CPU_DISABLED));
-        session = App.ENVIRONMENT.createSession(PathManager.getModelPath(context) +"/" +model, options);
+        File file = new File(PathManager.getCustomPath(context) + "/" + model);
+        session = App.ENVIRONMENT.createSession(file.exists() ? file.getAbsolutePath() : PathManager.getModelPath(context) +"/" +model, options);
     }
 
     public Object Decoder(Map<String, OnnxTensor> input) throws Exception {

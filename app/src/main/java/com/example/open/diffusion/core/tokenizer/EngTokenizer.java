@@ -10,6 +10,7 @@ import com.example.open.diffusion.PathManager;
 import com.example.open.diffusion.StringUtils;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.IntBuffer;
@@ -55,7 +56,8 @@ public class EngTokenizer implements TextTokenizer{
         if (session != null) return;
         OrtSession.SessionOptions options = new OrtSession.SessionOptions();
         options.addConfigEntry("session.load_model_format", "ORT");
-        session = App.ENVIRONMENT.createSession(PathManager.getModelPath(context) +"/" +model, options);
+        File file = new File(PathManager.getCustomPath(context) + "/" + model);
+        session = App.ENVIRONMENT.createSession(file.exists() ? file.getAbsolutePath() : PathManager.getModelPath(context) +"/" +model, options);
 
         if (!isInitMap){
             encoder.putAll(loadEncoder());
@@ -235,7 +237,8 @@ public class EngTokenizer implements TextTokenizer{
     private Map<String, Integer> loadEncoder(){
         Map<String, Integer> map = new HashMap<>();
         try {
-            String path = PathManager.getModelPath(context) + "/" + vocab;
+            File file = new File(PathManager.getCustomPath(context) + "/" + vocab);
+            String path = file.exists() ? file.getAbsolutePath() : PathManager.getModelPath(context) + "/" + vocab;
             JsonReader jsonReader = new JsonReader(new InputStreamReader(new FileInputStream(path)));
             jsonReader.beginObject();
             while (jsonReader.hasNext()) {
@@ -260,7 +263,8 @@ public class EngTokenizer implements TextTokenizer{
     private Map<Pair<String, String>, Integer> loadBpeRanks(){
         Map<Pair<String, String>, Integer> result = new HashMap<>();
         try {
-            String path = PathManager.getModelPath(context) + "/" + merges;
+            File file = new File(PathManager.getCustomPath(context) + "/" + merges);
+            String path = file.exists() ? file.getAbsolutePath() : PathManager.getModelPath(context) + "/" + merges;
             BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
             String line;
             int startLine = 1;
