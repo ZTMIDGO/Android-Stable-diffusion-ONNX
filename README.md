@@ -25,8 +25,7 @@ https://huggingface.co/TIEMING/Chilloutmix/blob/main/app-release-int8.apk
 
 https://huggingface.co/spaces/Duswishdb/Xc/resolve/main/app-debug.signed.apk
 
-![cap](https://github.com/ZTMIDGO/Android-Stable-diffusion-ONNX/assets/50280785/2efb0f03-43dd-4402-b2e6-bafe3cd2927c)
-
+![6](https://github.com/ZTMIDGO/Android-Stable-diffusion-ONNX/assets/50280785/9fb597c2-daee-4218-ae69-32572a2d480e)
 ![cap](https://huggingface.co/spaces/Duswishdb/Xc/resolve/main/Screenshot_2023-07-22-21-52-06-093_com.example.open.diffusion.jpg)
 
 ![image](https://github.com/ZTMIDGO/Android-Stable-diffusion-ONNX/blob/master/2.jpg)
