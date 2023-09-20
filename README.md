@@ -9,7 +9,7 @@
 https://github.com/Fcucgvhhhvjv/Android-Stable-diffusion-ONNX/blob/master/.github/workflows/android.yml
 
 也可以通过安装App体验
-https://huggingface.co/TIEMING/Chilloutmix/blob/main/app-release-int8.apk
+https://drive.google.com/file/d/1j76xRY8erhJ262XFqoxFt5Cey6PZMi0o/view?usp=drive_link 2023.9.20
 
 https://huggingface.co/spaces/Duswishdb/Xc/resolve/main/app-debug.signed.apk
 
@@ -21,7 +21,7 @@ Use github ci build to build APP:
 https://github.com/Fcucgvhhhvjv/Android-Stable-diffusion-ONNX/blob/master/.github/workflows/android.yml
 
 You can also experience it by installing the app 
-https://huggingface.co/TIEMING/Chilloutmix/blob/main/app-release-int8.apk
+https://drive.google.com/file/d/1j76xRY8erhJ262XFqoxFt5Cey6PZMi0o/view?usp=drive_link 2023.9.20
 
 https://huggingface.co/spaces/Duswishdb/Xc/resolve/main/app-debug.signed.apk
 
