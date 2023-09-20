@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -54,6 +55,8 @@ public class MainFragment extends Fragment {
     private EditText mSeedView;
     private View mGesView;
     private View mSetView;
+    private AppCompatSpinner mSpinner;
+    private View mSaveView;
 
     private UNet uNet;
     private Handler uiHandler;
@@ -134,6 +137,8 @@ public class MainFragment extends Fragment {
         mSeedView = view.findViewById(R.id.seed);
         mGesView = view.findViewById(R.id.generate);
         mSetView = view.findViewById(R.id.setting);
+        mSpinner = view.findViewById(R.id.spinner);
+        mSaveView = view.findViewById(R.id.save);
 
         mWidthSpinner.setSelection(3);
         mHeightSpinner.setSelection(3);
@@ -162,6 +167,20 @@ public class MainFragment extends Fragment {
                         }
                     }
                 });
+            }
+        });
+
+        mSaveView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mImageView.getDrawable() != null) {
+                    try {
+                        boolean success = FileUtils.saveImage(getActivity(), FileUtils.getBitmap(mImageView.getDrawable()));
+                        Toast.makeText(getActivity(), success ? "保存成功 success" : "保存失败 fail", Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             }
         });
 
@@ -228,7 +247,7 @@ public class MainFragment extends Fragment {
                     tokenizer.close();
 
                     uNet.init();
-                    uNet.inference(seed, num_inference_steps, textEmbeddings, guidance_scale, batch_size, UNet.WIDTH, UNet.HEIGHT);
+                    uNet.inference(seed, num_inference_steps, textEmbeddings, guidance_scale, batch_size, UNet.WIDTH, UNet.HEIGHT, mSpinner.getSelectedItemPosition());
                 }catch (Exception e){
                     uiHandler.post(new Runnable() {
                         @Override

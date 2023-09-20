@@ -107,9 +107,9 @@ public class UNet {
         isStop = true;
     }
 
-    public void inference(long seedNum, int numInferenceSteps, OnnxTensor textEmbeddings, double guidanceScale, int batchSize, int width, int height) throws Exception {
+    public void inference(long seedNum, int numInferenceSteps, OnnxTensor textEmbeddings, double guidanceScale, int batchSize, int width, int height, int schedulerType) throws Exception {
         isStop = false;
-        Scheduler scheduler = new EulerAncestralDiscreteScheduler(context);
+        Scheduler scheduler = schedulerType == 0 ? new EulerAncestralDiscreteScheduler(context) : new DPMSolverMultistepScheduler();
 
         int[] timesteps = scheduler.set_timesteps(numInferenceSteps);
 

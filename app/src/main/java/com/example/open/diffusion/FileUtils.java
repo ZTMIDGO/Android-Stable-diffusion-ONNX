@@ -1,12 +1,22 @@
 package com.example.open.diffusion;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.PixelFormat;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -107,6 +117,31 @@ public class FileUtils {
         }
 
         file.delete();
+    }
+
+    public static boolean saveImage(Context context, Bitmap toBitmap) throws Exception {
+        boolean success = false;
+        if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
+            String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), toBitmap, "壁纸", "搜索猫相关图片后保存的图片");
+            success = !TextUtils.isEmpty(path);
+        }else {
+            Uri insertUri = context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, new ContentValues());
+            OutputStream outputStream = context.getContentResolver().openOutputStream(insertUri, "rw");
+            success = toBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+        }
+        return success;
+    }
+
+    public static Bitmap getBitmap(Drawable drawable) {
+        Bitmap bitmap = Bitmap.createBitmap(
+                drawable.getIntrinsicWidth(),
+                drawable.getIntrinsicHeight(),
+                drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888
+                        : Bitmap.Config.RGB_565);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+        drawable.draw(canvas);
+        return bitmap;
     }
 
 }

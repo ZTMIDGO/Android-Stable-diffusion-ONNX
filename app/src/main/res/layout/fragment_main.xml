@@ -32,6 +32,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinner"
+            android:entries="@array/Scheduler"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"/>
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
@@ -106,7 +111,7 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:layout_gravity="center_vertical"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"/>
             <Button
                 android:id="@+id/generate"
@@ -124,6 +129,11 @@
         <com.example.open.diffusion.SquareImageView
             android:id="@+id/image"
             android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/save"
+            android:text="Save/保存"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </androidx.appcompat.widget.LinearLayoutCompat>

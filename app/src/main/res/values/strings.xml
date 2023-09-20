@@ -8,4 +8,8 @@
         <item>448</item>
         <item>512</item>
     </string-array>
+    <string-array name="Scheduler">
+        <item>EulerA</item>
+        <item>DPMS</item>
+    </string-array>
 </resources>
