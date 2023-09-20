@@ -8,8 +8,8 @@
 使用github ci build构建APP: 
 https://github.com/Fcucgvhhhvjv/Android-Stable-diffusion-ONNX/blob/master/.github/workflows/android.yml
 
-也可以通过安装App体验
-https://huggingface.co/TIEMING/Chilloutmix/blob/main/app-release-int8.apk
+也可以通过安装App体验 (2023.9.20)
+https://drive.google.com/file/d/1j76xRY8erhJ262XFqoxFt5Cey6PZMi0o/view?usp=drive_link
 
 https://huggingface.co/spaces/Duswishdb/Xc/resolve/main/app-debug.signed.apk
 
@@ -20,13 +20,12 @@ Download https://huggingface.co/TIEMING/Chilloutmix/tree/main model Copy the mod
 Use github ci build to build APP:
 https://github.com/Fcucgvhhhvjv/Android-Stable-diffusion-ONNX/blob/master/.github/workflows/android.yml
 
-You can also experience it by installing the app 
-https://huggingface.co/TIEMING/Chilloutmix/blob/main/app-release-int8.apk
+You can also experience it by installing the app (2023.9.20)
+https://drive.google.com/file/d/1j76xRY8erhJ262XFqoxFt5Cey6PZMi0o/view?usp=drive_link
 
 https://huggingface.co/spaces/Duswishdb/Xc/resolve/main/app-debug.signed.apk
 
-![cap](https://github.com/ZTMIDGO/Android-Stable-diffusion-ONNX/assets/50280785/2efb0f03-43dd-4402-b2e6-bafe3cd2927c)
-
+![6](https://github.com/ZTMIDGO/Android-Stable-diffusion-ONNX/assets/50280785/9fb597c2-daee-4218-ae69-32572a2d480e)
 ![cap](https://huggingface.co/spaces/Duswishdb/Xc/resolve/main/Screenshot_2023-07-22-21-52-06-093_com.example.open.diffusion.jpg)
 
 ![image](https://github.com/ZTMIDGO/Android-Stable-diffusion-ONNX/blob/master/2.jpg)
